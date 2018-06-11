@@ -11,8 +11,9 @@
   </div>
 
     <div class='bubble -three'>
-        <div class='title'>[Pkg.Hndlr]
+        <div class='title'><span id="title">[Pkg.Hndlr]</span> Review Packages and Gems
         <br>
+
         <% if user_signed_in? %>
         <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, class: "signin"%>
         <% else %>
