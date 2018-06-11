@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  validates :username, uniqueness: true
   # validates :username, length: { minimum: 3, maximum: 25 }
   # validates :age, numericality: { only_integer: true, greater_than: 0, less_than: 100 }
   # validates :first_name, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }

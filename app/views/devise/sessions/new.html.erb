@@ -1,10 +1,5 @@
 <div class="container2">
   <header class="header">
-    <div></div>
-    <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
-      <%= submit_tag "Search", :name => nil %>
-      <% end %>
     <% if user_signed_in? %>
       <nav class="main-nav">
         <div>
@@ -17,7 +12,7 @@
             <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
           </div>
           <div>
-            <%= link_to 'To HomePage', new_user_session_path %>
+            <%= link_to 'Sign Up', new_user_session_path %>
           </div>
         </nav>
         <% end %>
