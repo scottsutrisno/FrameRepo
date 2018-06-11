@@ -3,6 +3,7 @@
     <% if user_signed_in? %>
       <nav class="main-nav">
         <div>
+          <%= link_to 'New Review', new_review_path %>
           <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
         </div>
       </nav>

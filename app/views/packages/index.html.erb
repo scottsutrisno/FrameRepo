@@ -4,6 +4,7 @@
       <nav class="main-nav">
         <div>
           <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+          <%= link_to 'Back', packages_path, class:'main-nav' %>
         </div>
       </nav>
       <% else %>
@@ -126,7 +127,6 @@
   </div>
 
   <footer>
-    holder
   </footer>
 </div>
 

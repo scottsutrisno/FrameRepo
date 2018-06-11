@@ -3,6 +3,7 @@
     <% if user_signed_in? %>
       <nav class="main-nav">
         <div>
+          <%= link_to 'New Review', new_review_path %>
           <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
         </div>
       </nav>
@@ -97,21 +98,12 @@
 
 <br>
 <nav class='main-nav'>
-
-<%= link_to 'New Review', new_review_path %>
 </nav>
 
 
   </div>
 
 </div>
-
-
-
-
 <br>
 <br>
-<% if @reviews.blank? %>
-  <h4>There are no reviews containing the term <%= params[:search] %>.</h4>
-<% end %>
 </div>
