@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+    <%= form_for @package, method: :create do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br/>
+      <%= f.label :live %>
+      <%= f.check_box :live %><br/>
+      <%= f.label :url %>
+      <%= f.text_field :url%><br/>
+      <%= f.label :developed_by %>
+      <%= f.text_field :developed_by %><br/>
+      <%= f.label :last_updated %>
+      <%= f.date_select :last_updated %><br/>
+      <%= f.label :language_id %>
+      <%= f.collection_select(:language_id, Language.all, :id, :name) %><br/>
+      <%= f.hidden_field(:user_id, value: @user.id) %>
+      <%= f.submit "Submit New Package", data: { confirm: "Are you sure?" } %>
+  <% end %>
+<% else %>
+<br/>
+  <h3>Must be signed in to create a Package request.</h3><br/>
+<% end %>

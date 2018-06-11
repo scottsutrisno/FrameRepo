@@ -1,0 +1,98 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+
+
+      <ul class="side-nav">
+
+      <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <main>
+
+
+
+      <p id="notice">
+        <%= notice %>
+      </p>
+      <div class='container3'>
+<h1>New Package</h1>
+
+<%= render 'form', package: @package %>
+
+  <%= link_to 'Back', packages_path %>
+
+
+
+        </div>
+    </main>
+
+    </div>
+
+    <footer>
+      holder
+    </footer>
+  </div>

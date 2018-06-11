@@ -1,0 +1,136 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+    <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+
+
+    <ul class="side-nav">
+
+      <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+<div class="table2">
+  <table>
+    <thead>
+        <tr>
+          <th><%= @user.first_name%> <%= @user.last_name %>:</th>
+        </tr>
+    </thead>
+
+      <tbody>
+          <tr>
+            <td>Username: <%= @user.username %></td>
+            <td>Occupation: <%= @user.occupation %></td>
+            <td>Age: <%= @user.age %></td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="profilereview">
+    <h1>User Reviews:</h1>
+    <% @user.reviews.each do |review| %>
+        <ul class="list">
+          <li class="list_item">
+          Review On:<%= link_to " #{review.package.name} ", review_path(review.package.id) %>
+          </li>
+
+
+
+
+
+
+          <li class="list_item">
+           Review: <%= review.general %>
+          </li>
+
+
+
+          <li class="list_item">
+             Pros: <%= review.pros %>
+
+          </li>
+          <li class="list_item">
+            Cons: <%= review.cons %>
+          </li>
+        </ul>
+          <% end %>
+  </div>
+</div>
+
+
+
+
+    </div>
+      <div class="main-nav">
+      <%= link_to 'Back', users_path %>
+      </div>
+
+
+

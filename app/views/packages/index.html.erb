@@ -1,0 +1,137 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+      <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+
+
+    <ul class="side-nav">
+
+      <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <main>
+
+
+
+            <p id="notice"> <%= notice %> </p>
+<div class='container3'>
+            <div class='row'>
+
+              <% @packages.each do |package| %>
+                <div class='col-1-of-4'>
+                  <div class="card">
+                    <div class="card_side card_side-front">
+                      <div class="card-picture">
+                        &nbsp;
+                      </div>
+                      <h4 class="card-heading">
+                      <span class='card-heading-span card-heading-span-1'>
+                        <!-- <%=package.name%> -->
+                        <%= link_to package.name, package, class:'card-heading-span card-heading-span-1'%>
+                      </span>
+                      </h4>
+                      <div class="card-details">
+                      <ul>
+                        <li>
+                          Author: <%= package.developed_by %>
+
+                        </li>
+                        <li>
+                          <% if package.live == true %>
+                            Package is live
+
+                            <% else %>
+                             Package is down
+
+                          <% end %>
+                          <!-- <%= link_to 'Edit', edit_package_path(package) %> -->
+                        </li>
+                        <li>
+                          <!-- <%= link_to 'Destroy', package, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+
+                              Package was last updated:
+                              <%= package.last_updated.strftime("%d/%m/%y") %>
+
+                        </li>
+                      </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+</div>
+    </main>
+
+  </div>
+
+  <footer>
+    holder
+  </footer>
+</div>
+

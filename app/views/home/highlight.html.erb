@@ -1,0 +1,166 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+      <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+
+      <ul class="side-nav">
+
+      <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <main>
+
+
+
+      <p id="notice">
+        <%= notice %>
+      </p>
+
+
+
+        <div>
+        <h1>TOP RATED PACKAGE:</h1>
+        <img class= "img" src="http://www.stickpng.com/assets/images/58481021cef1014c0b5e494b.png" alt="">
+          <h1 class="overview_heading pad-med">
+
+          Mongo DB <br>
+
+          </h1>
+
+
+
+
+
+        </div>
+        <br>
+        <h2>Description:</h2>
+        <p class="paragraph">
+          MongoDB is a cross-platform and open-source document-oriented database, a kind of NoSQL database. As a NoSQL database, MongoDB shuns the relational database’s table-based structure to adapt JSON-like documents that have dynamic schemas which it calls BSON. This makes data integration for certain types of applications faster and easier. MongoDB is built for scalability, high availability and performance from a single server deployment to large and complex multi-site infrastructures.
+        </p>
+        <h2>Features:</h2>
+        <ul class="paragraph pad">
+          <li>Ad hoc queries - supports search by field, regular expression searches, and range queries.</li>
+          <li>Indexing - any field in the BSON document can be indexed.</li>
+          <li>Replication - provides high availability via replica sets which consists of two or more copies of the original data.</li>
+          <li>Load balancing - sharding is the method used to allow MongoDB to scale horizontally, meaning that data will be distributed and split into ranges and then stored in different shards which can be located in different servers. Shard keys are used to determine how the data will be distributed.</li>
+          <li>Aggregation - MapReduce can be applied to enable batch processing of data as well as perform aggregation operations.</li>
+          <li>File storage - MongoDB can be used as file system which makes use of the above functions and acting in a distributed manner through sharding.</li>
+          </ul>
+
+        </p>
+        <ul class="list">
+          <li class="list_item">
+          Average Rating: <%= @average_rating %>
+          </li>
+
+
+          <% @highlight.reviews.each do |review| %>
+
+
+
+          <li class="list_item">Reviewed By:<%= link_to " #{review.user.username} ", user_path(review.user) %>
+          </li>
+  <% end %>
+
+
+          <li class="list_item">
+              Developed-By: <%= @highlight.developed_by %> <br>
+          </li>
+          <li class="list_item">
+            <% if @highlight.live == true%>
+              Package is live
+              <% else %>
+                Package is down
+                <% end %>
+          </li>
+
+        </ul>
+        <div class="recommend">
+          <nav class='main-nav'>
+
+          </nav>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+  </div>
+</div>
+
+
+

@@ -1,0 +1,3 @@
+adapter: redis
+url: YOUR_URL
+# Or simply use adapter: async (the default value).

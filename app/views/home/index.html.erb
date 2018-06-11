@@ -1,0 +1,29 @@
+
+<div class='box'>
+  <div class='wave -one'></div>
+  <div class='wave -two'></div>
+  <div class='wave -three'></div>
+  <div class="ducky">
+  <div class="duck"><img src="https://vignette.wikia.nocookie.net/color/images/d/df/Rubber_Duck.png/revision/latest?cb=20130531102901" alt=""></div></div>
+
+
+  <div class='bubble -four'>
+  </div>
+
+    <div class='bubble -three'>
+        <div class='title'>[Pkg.Hndlr]
+        <br>
+        <% if user_signed_in? %>
+        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, class: "signin"%>
+        <% else %>
+        <%= link_to 'Sign In', new_user_session_path, class: "signin" %>
+        <% end %>
+        </div>
+    </div>
+
+  <%= link_to 'Home', highlights_path, class: "homelink" %>
+
+
+</div>
+
+

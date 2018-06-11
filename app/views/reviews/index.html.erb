@@ -1,0 +1,122 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+    <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+    <ul class="side-nav">
+
+          <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+    <p id="notice"><%= notice %></p>
+<div class="tablea">
+
+
+<table>
+  <thead>
+    <tr>
+      <th>User Review</th>
+      <th>Package Name</th>
+      <th>Language</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.user.username %></td>
+        <td><%= review.package.name %> </td>
+        <td><%= review.package.language.name %></td>
+        <td><%= link_to 'Show', review %></td>
+        <!-- <td><%= link_to 'Edit', edit_review_path(review) %></td>
+        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<nav class='main-nav'>
+
+<%= link_to 'New Review', new_review_path %>
+</nav>
+
+
+  </div>
+
+</div>
+
+
+
+
+<br>
+<br>
+<% if @reviews.blank? %>
+  <h4>There are no reviews containing the term <%= params[:search] %>.</h4>
+<% end %>
+</div>

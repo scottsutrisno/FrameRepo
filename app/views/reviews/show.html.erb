@@ -1,0 +1,281 @@
+<div class="container2">
+  <header class="header">
+    <div></div>
+    <%= form_tag(reviews_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Site" %>
+      <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    <% if user_signed_in? %>
+      <nav class="main-nav">
+        <div>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </div>
+      </nav>
+      <% else %>
+        <nav class="main-nav">
+          <div>
+            <%= link_to 'Sign In!', new_user_session_path, class: "signin" %>
+          </div>
+          <div>
+            <%= link_to 'To HomePage', new_user_session_path %>
+          </div>
+        </nav>
+        <% end %>
+  </header>
+
+  <div class="content">
+
+    <nav class="sidebar">
+
+
+
+      <ul class="side-nav">
+
+      <li class="logo-box">
+        <a href="/"> <%= image_tag("duck4.png", class:'logo') %>
+      </li>
+
+        <li class="side-nav_item">
+          <a href="/highlight" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("home.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/packages" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("frameworks.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item side-nav_item--active">
+          <a href="/reviews" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("diamond.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+        <li class="side-nav_item">
+          <a href="/users" class="side-nav_link">
+            <svg class="side-nav_icon">
+              <%= image_tag("user.png", class:'side-nav_icon')  %>
+            </svg>
+            <span></span>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+    <p id="notice">
+      <%= notice %>
+    </p>
+    <div class="container4 pad-small">
+
+
+      <div class="tableb">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Reviewer</th>
+              <th>Package Name:</th>
+              <th>Package Language</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td>
+              <%= @review.user.username %>
+            </td>
+            <td>
+              <%= @review.package.name %>
+            </td>
+            <td>
+              <%=@review.package.language.name %>
+            </td>
+            <td>
+              <%=@review.overall_rating %>
+            </td>
+          </tbody>
+        </table>
+        </div>
+
+
+
+        <div class="tableb">
+          <table>
+            <thead>
+              <th>Pros</th>
+              <th>Cool Design</th>
+              <th>Advanced Features</th>
+              <th>Saved Time</th>
+            </thead>
+            <tbody>
+              <td>Yes/No</td>
+
+              <td>
+                <% if @review.cool_design == 1 %>
+                  Yes
+                  <% else %>
+                    n/a
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.saved_time == 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+
+              </td>
+              <td>
+                <% if @review.advanced_features == 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+
+              </td>
+            </tbody>
+          </table>
+        </div>
+        <div class="tableb">
+          <table>
+            <thead>
+              <th>Cons</th>
+              <th>Hard to Customize</th>
+              <th>Too Many Files</th>
+              <th>Bad Navigation</th>
+              <th>Hard to Learn</th>
+            </thead>
+
+            <tbody>
+              <td>Yes/No</td>
+              <td>
+                <% if @review.hard_customize === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.many_files === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.bad_navigation === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.hard_to_learn === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="tableb">
+          <table>
+            <thead>
+              <th>Suggestions</th>
+              <th>More Customization</th>
+              <th>Better Documentation</th>
+              <th>Make Less Bulky</th>
+            </thead>
+            <tbody>
+              <td>Yes/No</td>
+              <td>
+                <% if @review.more_customize === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.better_docs === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+              <td>
+                <% if @review.less_bulky === 1 %>
+                  Yes
+                  <% else %>
+                    no
+                    <% end %>
+              </td>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tableb">
+          <table>
+            <thead>
+              <th>Comments</th>
+              <th>Posted By</th>
+              <th>Date Posted</th>
+            </thead>
+            <tbody>
+              <% @comments.each do | comment | %>
+                <td>
+                  <%=comment.content %>
+                </td>
+                <td>
+                  <% if @user.id == comment.user.id %>
+                    <%=link_to 'Delete', comment, :method => :delete, :confirm => "Comment will be deleted" %>
+                      <% end %>
+
+                        <%=comment.user.username %>
+                </td>
+                <td>
+                  <%=comment.created_at %>
+                </td>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+
+
+
+
+<div class='pad-top-large'>
+        <% if user_signed_in? %>
+          <%= form_for @new_comment, method: :create do |f| %>
+
+              <%= f.text_area :content %>
+                <br/>
+                <%= f.hidden_field(:review_id, value: @review.id)%>
+                  <%= f.hidden_field(:user_id, value: @user.id) %>
+                    <%= f.submit "Add Comment", class: "commentform", data: { confirm: "Are you sure?" } %>
+                      <% end %>
+                        <% end %>
+
+                          <!-- <%= link_to 'Edit', edit_review_path(@review) %> | -->
+                          <div class="main-nav">
+                            <%= link_to 'Back', reviews_path %>
+                          </div>
+</div>
+      </div>

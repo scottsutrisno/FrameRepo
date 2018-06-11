@@ -1,0 +1,50 @@
+<div class="notice">
+  <%= notice %>
+</div>
+
+<% if @user.username != nil %>
+  <%= form_for @review, method: :create do |form| %>
+    <%= form.label :package %>
+    <%= form.collection_select(:package_id, Package.all, :id, :name) %><br/>
+    <%= form.label :pros %>
+    <%= form.text_field :pros %><br />
+    <%= form.label :cons %>
+    <%= form.text_field :cons %><br />
+    <%= form.label :general %>
+    <%= form.text_area :general %><br/>
+    <%= form.label :overall_rating %>
+    <%= form.number_field 'overall_rating', in: 1..10 %><br />
+    <section>
+      <h2>Liked Features:</h2>
+      <ul class="f2">
+        <li>Saved Time? <%= form.check_box :saved_time %></li>
+        <li>Cool Design? <%= form.check_box :cool_design %></li>
+        <li>Advanced Features? <%= form.check_box :advanced_features %></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Disliked Features: </h2>
+      <ul class="f2">
+        <li>Hard to Customize? <%= form.check_box :hard_customize %></li>
+        <li>Too many Files? <%= form.check_box :many_files %></li>
+        <li>Bad Navigation? <%= form.check_box :bad_navigation %></li>
+        <li>Difficult to Learn? <%= form.check_box :hard_to_learn %></li>
+        </ul>
+    </section>
+    <section>
+      <h2>Things you would change:</h2>
+      <ul class="f2">
+        <li>More Customization? <%= form.check_box :more_customize %></li>
+        <li>Better Documentation? <%= form.check_box :better_docs %></li>
+        <li>Lighter/Less Bulky? <%= form.check_box :less_bulky %></li>
+      </ul>
+    </section>
+    <%= form.hidden_field(:user_id, value: "#{@user.id}") %>
+    <div class="actions">
+    <br/>
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% else %>
+  <h3>Note: Github users must edit their profile to include a username in order to post a review or a comment <%= link_to "Edit Profile", edit_user_registration_path %></h3>
+<% end %>
